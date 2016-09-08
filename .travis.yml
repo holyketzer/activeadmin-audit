@@ -21,4 +21,4 @@ script:
 
 addons:
   code_climate:
-    repo_token: 9c938a047651a943393f0f52bfc1d03d71fce0f19bf0f8c1265033af9b09a56e
+    repo_token: fa6eecd14a238a6a4326b5b001bab6b0acf5170da237779800fa4935ad1c0026
