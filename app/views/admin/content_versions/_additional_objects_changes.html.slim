@@ -1,0 +1,26 @@
+- if additional_objects_changes.any?
+  h3 Related object changes
+  table.diff
+    thead: tr
+      th Attribute
+      th Removed
+      th Added
+    tbody
+      - additional_objects_changes.each do |attr, changes|
+        - added = changes['+']
+        - removed = changes['-']
+
+        - old_class, new_class = versions_diff_classes(removed, added)
+
+        tr
+          td.attr-name = attr.humanize
+          td class=old_class
+            - if removed
+              ul
+                - removed.each do |removed_item|
+                  li = pretty_version_attribute_value(attr, removed_item)
+          td class=new_class
+            - if added
+              ul
+                - added.each do |added_item|
+                  li = pretty_version_attribute_value(attr, added_item)

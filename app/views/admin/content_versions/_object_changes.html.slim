@@ -1,0 +1,16 @@
+- if object_changes.any?
+  h3 Object changes
+  table.diff
+    thead: tr
+      th Attribute
+      th Old value
+      th New value
+    tbody
+      - object_changes.each do |attr, diff|
+        - old_value, new_value = diff
+        - old_class, new_class = versions_diff_classes(old_value, new_value)
+
+        tr
+          td.attr-name = attr.humanize
+          td class=old_class = pretty_version_attribute_value(attr, old_value)
+          td class=new_class = pretty_version_attribute_value(attr, new_value)

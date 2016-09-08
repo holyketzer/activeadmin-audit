@@ -1,0 +1,11 @@
+- if object_snapshot.any?
+  h3 Object snapshot
+  table.diff
+    thead: tr
+      th = 'Attribute'
+      th = 'Value'
+    tbody
+      - object_snapshot.each do |attr, value|
+        tr
+          td.attr-name = attr.humanize
+          td = pretty_version_attribute_value(attr, value)

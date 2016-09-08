@@ -1,0 +1,13 @@
+- if additional_objects_snapshot.any?
+  h3 Related objects snapshot
+  table.diff
+    thead: tr
+      th Attribute
+      th Value
+    tbody
+      - additional_objects_snapshot.each do |attr, values|
+        tr
+          td.attr-name = attr.humanize
+          td: ul
+            - values.each do |value|
+              li = pretty_version_attribute_value(attr, value)

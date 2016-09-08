@@ -1,0 +1,37 @@
+.diff {
+  background: #F4F4F4;
+  width: auto;
+
+  table, th, td {
+    border: 0.5px solid #aaa;
+  }
+
+  thead > tr > th {
+    background: #E4E4E4;
+    padding: 7px;
+    border-width: 0.5px 0.5px 2px;
+  }
+
+  .attr-name {
+    font-weight: bold;
+  }
+
+  .added {
+    background: #EEFFE7;
+    color: #3C763D;
+  }
+
+  .changed {
+    background: #FFFBE6;
+    color: #7D6C00;
+  }
+
+  .removed {
+    background: #FFF0F0;
+    color: #CD2929;
+  }
+
+  img {
+    width: 350px;
+  }
+}
