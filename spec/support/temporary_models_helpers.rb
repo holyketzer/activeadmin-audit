@@ -75,8 +75,11 @@ module TemporaryModelsHelpers
         end
       end
 
+      Temping.create :person do
+        include TempingComparable
+      end
+
       Temping.create :language
-      Temping.create :person
       Temping.create :publishing_rule
     end
 
