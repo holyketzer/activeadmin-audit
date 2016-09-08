@@ -1,3 +1,4 @@
+require 'active_admin'
 require 'active_admin/audit/version'
 require 'active_admin/audit/engine'
 require 'active_admin/audit/controller_helper'
