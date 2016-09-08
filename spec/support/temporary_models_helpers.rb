@@ -46,6 +46,8 @@ module TemporaryModelsHelpers
       end
 
       Temping.create :cast_member do
+        include TempingComparable
+
         belongs_to :movie
         belongs_to :person
 
