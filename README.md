@@ -1,8 +1,11 @@
+[![Gem Version](https://badge.fury.io/rb/activeadmin-audit.svg)](https://badge.fury.io/rb/activeadmin-audit)
+[![Build Status](https://travis-ci.org/holyketzer/activeadmin-audit.svg?branch=master)](https://travis-ci.org/holyketzer/activeadmin-audit)
+[![Code Climate](https://codeclimate.com/github/holyketzer/activeadmin-audit/badges/gpa.svg)](https://codeclimate.com/github/holyketzer/activeadmin-audit)
+[![Test Coverage](https://codeclimate.com/github/holyketzer/activeadmin-audit/badges/coverage.svg)](https://codeclimate.com/github/holyketzer/activeadmin-audit/coverage)
+
 # Activeadmin::Audit
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/activeadmin/audit`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem allows you to track changes of records which done through ActiveAdmin panel. Also works with has_many relations
 
 ## Installation
 
@@ -22,7 +25,54 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Copy and apply migrations
+
+```bash
+rake active_admin_audit:install:migrations
+rake db:migrate
+```
+
+Include this line in your CSS code (active_admin.scss)
+
+```scss
+@import "activeadmin-audit";
+```
+
+Include this module in your `ApplicationController`
+
+```ruby
+class ApplicationController < ActionController::Base
+  include ActiveAdmin::Audit::ControllerHelper
+end
+```
+
+From model that you want to auditing call `has_versions` method 
+
+```ruby
+class Movie < ActiveRecord::Base
+  has_many :genres
+  has_many :images
+
+  has_versions skip: [:comment], also_include: {
+    genres: [:id],
+    images: [:url, :width, :height, :kind],
+  }
+```
+ 
+By default `has_versions` take care about all record attributes including belongs_to references. If you don't want to include some attribute you can pass it name to `skip` options. If you want to include has_many relation pass it's name with attributes to  `also_include` option.
+
+To display table with latest changes on the ActiveAdmin resource page use helper `latest_versions`:
+
+```ruby
+ActiveAdmin.register Movie do
+  # ...
+
+  show do |movie|
+    # ...
+    latest_versions(movie)
+  end
+end
+```
 
 ## Development
 
