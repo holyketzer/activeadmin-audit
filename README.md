@@ -23,6 +23,26 @@ Or install it yourself as:
 
     $ gem install activeadmin-audit
 
+## Setting up Active Admin Audit (for Rails)
+
+After installing the gem, you need to run the generator. Here are your options:
+
+- If you want to use an existing user class, provide it as an argument:
+  ```sh
+  rails g active_admin_audit:install User
+  ```
+
+- Otherwise, with no arguments we will create an `AdminUser` class to use with Devise:
+  ```sh
+  rails g active_admin_audit:install
+  ```
+
+The generator adds these core files, among others:
+
+```
+config/initializers/active_admin_audit.rb
+```
+
 ## Usage
 
 Copy and apply migrations
@@ -46,7 +66,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-From model that you want to auditing call `has_versions` method 
+From model that you want to auditing call `has_versions` method
 
 ```ruby
 class Movie < ActiveRecord::Base
@@ -58,7 +78,7 @@ class Movie < ActiveRecord::Base
     images: [:url, :width, :height, :kind],
   }
 ```
- 
+
 By default `has_versions` take care about all record attributes including belongs_to references. If you don't want to include some attribute you can pass it name to `skip` options. If you want to include has_many relation pass it's name with attributes to  `also_include` option.
 
 To display table with latest changes on the ActiveAdmin resource page use helper `latest_versions`:
@@ -88,4 +108,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
