@@ -29,7 +29,7 @@ module ActiveAdmin
       end
 
       def who
-        AdminUser.find_by(id: whodunnit)
+        Audit.configuration.user_class_name.to_s.classify.constantize.find_by(id: whodunnit)
       end
 
       def item_class
