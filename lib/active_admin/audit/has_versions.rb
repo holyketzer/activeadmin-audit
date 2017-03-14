@@ -14,7 +14,7 @@ module ActiveAdmin
             options[:skip] += translated_attrs.map { |attr| "#{attr}_translations" }
           end
 
-          has_paper_trail options.merge(on: [:nothing], class_name: 'ActiveAdmin::Audit::ContentVersion', meta: {
+          has_paper_trail options.merge(on: [], class_name: 'ActiveAdmin::Audit::ContentVersion', meta: {
             additional_objects: ->(record) { record.additional_objects_snapshot.to_json },
             additional_objects_changes: ->(record) { record.additional_objects_snapshot_changes.to_json },
           })
@@ -39,7 +39,7 @@ module ActiveAdmin
 
             # Will save new version of the object
             after_commit do
-              if paper_trail_switched_on?
+              if paper_trail.enabled?
                 if @event_for_paper_trail
                   generate_version!
                 end
@@ -50,7 +50,7 @@ module ActiveAdmin
 
             if options_on.include?(:create)
               after_create do
-                if paper_trail_switched_on?
+                if paper_trail.enabled?
                   @event_for_paper_trail = 'create'
                 end
               end
@@ -59,7 +59,7 @@ module ActiveAdmin
             if options_on.include?(:update)
               # Cache object changes to access it from after_commit
               after_update do
-                if paper_trail_switched_on?
+                if paper_trail.enabled?
                   @event_for_paper_trail = 'update'
                   cache_version_object_changes
                 end
@@ -69,7 +69,7 @@ module ActiveAdmin
             if options_on.include?(:destroy)
               # Cache all details to access it from after_commit
               before_destroy do
-                if paper_trail_switched_on?
+                if paper_trail.enabled?
                   @event_for_paper_trail = 'destroy'
                   cache_version_object
                   cache_version_object_changes
@@ -97,15 +97,15 @@ module ActiveAdmin
       private
 
       def cache_version_object
-        @version_object_cache ||= object_attrs_for_paper_trail(self.attributes)
+        @version_object_cache ||= paper_trail.object_attrs_for_paper_trail
       end
 
       def cache_version_object_changes
-        @version_object_changes_cache ||= changes_for_paper_trail
+        @version_object_changes_cache ||= paper_trail.changes
       end
 
       def cache_version_additional_objects_and_changes
-        @version_additional_objects_and_changes_cache ||= merge_metadata({})
+        @version_additional_objects_and_changes_cache ||= paper_trail.merge_metadata({})
       end
 
       def clear_version_cache

@@ -5,7 +5,12 @@ ActiveAdmin.register ActiveAdmin::Audit::ContentVersion, as: 'ContentVersion' do
 
   filter :item_type, input_html: { class: 'chosen' }, as: :select
   filter :event, input_html: { class: 'chosen' }, as: :select
-  filter :whodunnit, input_html: { class: 'chosen' }, as: :select, collection: -> { Audit.configuration.user_class_name.to_s.classify.constantize.all.map { |u| [u.email, u.id] } }
+  filter :whodunnit, input_html: { class: 'chosen' }, as: :select,
+                     collection: lambda {
+                       ActiveAdmin::Audit.configuration.user_class_name.to_s.classify.constantize.all.map do |user|
+                         [user.email, user.id]
+                       end
+                     }
   filter :created_at
 
   index do
