@@ -14,6 +14,10 @@ module ActiveAdmin
         module ActiveAdmin::ViewHelpers
           include ActiveAdmin::VersionsHelper
         end
+
+        ActiveAdmin.setup do |config|
+          config.before_filter :set_paper_trail_whodunnit
+        end
       end
 
       initializer 'active_record.set_configs' do
