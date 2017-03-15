@@ -15,7 +15,7 @@ module ActiveAdmin
           include ActiveAdmin::VersionsHelper
         end
 
-        ActiveAdmin.setup do |config|
+        ActiveAdmin.before_load do |config|
           config.before_filter :set_paper_trail_whodunnit
         end
       end
