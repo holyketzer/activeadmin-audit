@@ -43,6 +43,12 @@ The generator adds these core files, among others:
 config/initializers/active_admin_audit.rb
 ```
 
+Then you have to install migrations to persist papper trails:
+
+```
+rake active_admin_audit:install:migrations
+```
+
 ## Usage
 
 Copy and apply migrations
