@@ -1,24 +1,18 @@
-sudo: false
+---
 language: ruby
-
 rvm:
-  - 2.1.5
-  - 2.2.4
-  - 2.3.1
-  - ruby-head
-
-matrix:
-  allow_failures:
-    - rvm: ruby-head
-  fast_finish: true
-
-before_install: gem update --remote bundler
+- 2.3.4
+- 2.4.1
+before_install:
+- gem update --remote bundler
 install:
-  - bundle install --retry=3
+- bundle install --retry=3
 script:
-  - bundle exec rake dummy:prepare
-  - bundle exec rspec
-
+- bundle exec rake dummy:prepare
+- bundle exec rspec
+gemfile:
+- gemfiles/rails_4.2.9_active_admin_1.0.0_paper_trail_5.2.3.gemfile
+- gemfiles/rails_5.1.2_active_admin_1.0.0_paper_trail_5.2.3.gemfile
 addons:
   code_climate:
     repo_token: fa6eecd14a238a6a4326b5b001bab6b0acf5170da237779800fa4935ad1c0026

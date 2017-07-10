@@ -1,22 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ActiveAdmin::Audit::ContentVersion, temporary_models: true do
-  before(:all) do
-    # use non-trasactional cleaning strategy because versioning happens after commit
-    self.use_transactional_fixtures = false
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  around(:each) do |example|
-    DatabaseCleaner.cleaning { example.run }
-  end
-
-  after(:all) do
-    # Return back trasactional cleaning strategy
-    self.use_transactional_fixtures = true
-  end
-
   let(:version) { resource.versions.last }
 
   describe 'resource versioning' do
