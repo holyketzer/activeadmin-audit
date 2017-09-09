@@ -11,8 +11,8 @@ script:
 - bundle exec rake dummy:prepare
 - bundle exec rspec
 gemfile:
-- gemfiles/rails_4.2.9_active_admin_1.0.0_paper_trail_5.2.3.gemfile
-- gemfiles/rails_5.1.2_active_admin_1.0.0_paper_trail_5.2.3.gemfile
+- gemfiles/rails_4.2.9_active_admin_1.0.0_paper_trail_7.1.2.gemfile
+- gemfiles/rails_5.1.2_active_admin_1.0.0_paper_trail_7.1.2.gemfile
 addons:
   code_climate:
     repo_token: fa6eecd14a238a6a4326b5b001bab6b0acf5170da237779800fa4935ad1c0026

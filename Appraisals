@@ -4,7 +4,7 @@ ruby_versions = %w(2.3.4 2.4.1)
 
 rails_versions = %w(4.2.9 5.1.2)
 activeadmin_versions = %w(1.0.0)
-paper_trail_versions = %w(5.2.3)
+paper_trail_versions = %w(7.1.2)
 
 rails_versions.each do |rails_version|
   activeadmin_versions.each do |activeadmin_version|

@@ -16,7 +16,7 @@ module ActiveAdmin
         end
 
         ActiveAdmin.before_load do |config|
-          config.before_filter :set_paper_trail_whodunnit
+          config.before_action :set_paper_trail_whodunnit
         end
       end
 

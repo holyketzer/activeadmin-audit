@@ -105,7 +105,7 @@ module ActiveAdmin
       end
 
       def cache_version_additional_objects_and_changes
-        @version_additional_objects_and_changes_cache ||= paper_trail.merge_metadata({})
+        @version_additional_objects_and_changes_cache ||= paper_trail.merge_metadata_into({})
       end
 
       def clear_version_cache
