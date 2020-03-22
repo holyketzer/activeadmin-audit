@@ -11,3 +11,4 @@
 /spec/dummy/log
 /spec/reports/
 /tmp/
+.ruby-version
