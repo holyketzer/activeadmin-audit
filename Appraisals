@@ -1,6 +1,6 @@
 require 'yaml'
 
-ruby_versions = %w(2.3.4 2.4.1)
+ruby_versions = %w(2.3.8 2.4.9)
 
 rails_versions = %w(4.2.9 5.1.2)
 activeadmin_versions = %w(1.0.0)
